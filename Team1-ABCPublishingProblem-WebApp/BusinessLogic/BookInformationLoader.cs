@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.DataProtection.KeyManagement;
 using Team1_ABCPublishingProblem_WebApp.Models.Interfaces;
 using Team1_ABCPublishingProblem_WebApp.Models.Objects;
 
@@ -19,9 +20,9 @@ namespace Team1_ABCPublishingProblem_WebApp.BusinessLogic
             _sections = _parser.LoadJSON();
         }
 
-        public bool CheckIfBookTitleExists(string title)
+        public bool CheckIfKeyExists(string key)
         {
-            if(!_sections.ContainsKey(title))
+            if(!_sections.ContainsKey(key))
             {
                 return false;
             }
@@ -29,14 +30,31 @@ namespace Team1_ABCPublishingProblem_WebApp.BusinessLogic
             return true;
         }
 
-        public string[] GetBookContentFromName(string title)
+        public void ThrowExceptionIfKeyNotFound(string key)
         {
-            return _sections[title].Content;
+            if (!CheckIfKeyExists(key))
+            {
+                throw new Exception("That title was not found");
+            }
         }
 
-        public string[] GetButtonNames(string title)
+        public string GetTitleByKey(string key)
         {
-            Navigation[] navigationItems = _sections[title].Navigation;
+            return _sections[key].Title;
+        }
+
+        public string[] GetSectionContentByKey(string key)
+        {
+            ThrowExceptionIfKeyNotFound(key);
+
+            return _sections[key].Content;
+        }
+
+        public string[] GetButtonTextByKey(string key)
+        {
+            ThrowExceptionIfKeyNotFound(key);
+
+            Navigation[] navigationItems = _sections[key].Navigation;
 
             List<string> buttonNames = new List<string>();
             foreach (Navigation navItem in navigationItems)
@@ -47,9 +65,11 @@ namespace Team1_ABCPublishingProblem_WebApp.BusinessLogic
             return buttonNames.ToArray();
         }
 
-        public string[] GetButtonSections(string title)
+        public string[] GetButtonSectionsByKey(string key)
         {
-            Navigation[] navigationItems = _sections[title].Navigation;
+            ThrowExceptionIfKeyNotFound(key);
+
+            Navigation[] navigationItems = _sections[key].Navigation;
 
             List<string> buttonSections = new List<string>();
             foreach (Navigation navItem in navigationItems)
@@ -59,5 +79,27 @@ namespace Team1_ABCPublishingProblem_WebApp.BusinessLogic
 
             return buttonSections.ToArray();
         }
+
+        public string[] GetContentByTitle(string title)
+        {
+            string key = _sections.FirstOrDefault(x => x.Value.Title == title).Key;
+
+            return _sections[key].Content;
+        }
+
+        //public string[] GetButtonTextByTitle(string title)
+        //{
+        //    ThrowExceptionIfKeyNotFound(key);
+
+        //    Navigation[] navigationItems = _sections[key].Navigation;
+
+        //    List<string> buttonNames = new List<string>();
+        //    foreach (Navigation navItem in navigationItems)
+        //    {
+        //        buttonNames.Add(navItem.Text);
+        //    }
+
+        //    return buttonNames.ToArray();
+        //}
     }
 }
