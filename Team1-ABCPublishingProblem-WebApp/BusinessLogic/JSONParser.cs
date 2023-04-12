@@ -4,7 +4,7 @@ using Newtonsoft.Json.Linq;
 using Team1_ABCPublishingProblem_WebApp.Models.Interfaces;
 using Team1_ABCPublishingProblem_WebApp.Models.Objects;
 
-namespace Team1_ABCPublishingProblem
+namespace Team1_ABCPublishingProblem_WebApp.BusinessLogic
 {
     public class JSONParser : IJSONParser
     {
@@ -14,11 +14,11 @@ namespace Team1_ABCPublishingProblem
 
             string fullFilePath = Path.GetFullPath("the-adventures-of-sherlock-holmes-sample.json");
             using (StreamReader reader = new StreamReader(fullFilePath))
-            { 
+            {
                 string json = reader.ReadToEnd();
                 JObject section = JObject.Parse(json);
 
-                foreach(JProperty property in section.Properties())
+                foreach (JProperty property in section.Properties())
                 {
                     Section newSection = ParseJsonToSectionObject(property);
 
@@ -26,9 +26,9 @@ namespace Team1_ABCPublishingProblem
                 }
             }
 
-            foreach(var section in sectionDictionary)
+            foreach (var section in sectionDictionary)
             {
-                string content = ""; 
+                string content = "";
                 if (section.Value.Content.Length > 0)
                 {
                     content = section.Value.Content[0];
