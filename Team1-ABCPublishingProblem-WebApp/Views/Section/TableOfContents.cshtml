@@ -1,10 +1,12 @@
-﻿@{
+﻿@model Team1_ABCPublishingProblem_WebApp.Models.Objects.Section
+@{
 	ViewData["Title"] = "Table of Contents";
 }
 
 <h4 class="display-4">Book Series Title</h4>
 <hr/>
 <h2>List of Books</h2>
+<h1>@Html.DisplayFor( m => m.Title)</h1>
 <ul class="list-group">
 	<li class="list-group-item">
 		<a href="@Url.Action("Book", "Section")">Sample Book</a>

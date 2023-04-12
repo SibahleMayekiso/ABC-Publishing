@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Team1_ABCPublishingProblem_WebApp.BusinessLogic;
+using Team1_ABCPublishingProblem_WebApp.Models.Interfaces;
 using Team1_ABCPublishingProblem_WebApp.Models.Objects;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -8,7 +9,7 @@ namespace Team1_ABCPublishingProblem_WebAPI.Controllers
 {
     //[Route("api/[controller]")]
     [ApiController]
-    public class SectionController : ControllerBase
+    public class SectionController : Controller
     {
         // GET: api/<SectionController>/preface
         [HttpGet]
@@ -23,17 +24,28 @@ namespace Team1_ABCPublishingProblem_WebAPI.Controllers
         // GET api/<SectionController>/TableOfContents
         [HttpGet]
         [Route("api/[controller]/TableOfContents")]
-        public string GetTableOfContents()
+        public ViewResult GetTableOfContents()
         {
-            return "Table of Contents";
+            IJSONParser parser = new JSONParser();
+            var section = new BookInformationLoader(parser);
+
+            //string[] content = section.GetContentByTitle("table-of-contents");
+
+            return View("TableOfContents", section);
         }
 
         // GET api/<SectionController>/a-scandal-in-bohemia
         [HttpGet]
         [Route("api/[controller]/a-scandal-in-bohemia")]
-        public string GetBook()
+        public ViewResult GetBook()
         {
-            return "A-scandal-in-bohemia";
+            IJSONParser parser = new JSONParser();
+            IDictionary<string, Section> dict = parser.LoadJSON();
+            var section = new BookInformationLoader(parser);
+
+            var newSection = dict["a-scandal-in-bohemia"];
+
+            return View("BookContent", newSection);
         }
 
         // GET api/<SectionController>/bohemia-chapter-1
