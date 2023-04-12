@@ -11,28 +11,27 @@ namespace Team1_ABCPublishingProblem_WebAPI.Controllers
     [ApiController]
     public class SectionController : Controller
     {
-        IJSONParser parser = new JSONParser();
-        IDictionary<string, Section> dict;
-        
+        private IJSONParser parser = new JSONParser();
+        private IDictionary<string, Section> dict;
+
         
         // GET: api/<SectionController>/preface
         [HttpGet]
         [Route("api/[controller]/Preface")]
-        public IDictionary<string, Section> GetBookPreface()
+        public IActionResult GetBookPreface()
         {
-            var parser = new JSONParser();
+			IDictionary<string, Section> dict = parser.LoadJSON();
+			Section tableOfContents = dict["table-of-contents"];
 
-            return parser.LoadJSON();
-        }
+			return View("Book", tableOfContents);
+		}
 
         // GET api/<SectionController>/TableOfContents
         [HttpGet]
         [Route("api/[controller]/TableOfContents")]
         public IActionResult GetTableOfContents()
         {
-            var section = new BookInformationLoader(parser);
 			IDictionary<string, Section> dict = parser.LoadJSON();
-            //string[] content = section.GetContentByTitle("table-of-contents");
             Section tableOfContents = dict["table-of-contents"];
 
             return View("TableOfContents", tableOfContents);
@@ -41,39 +40,45 @@ namespace Team1_ABCPublishingProblem_WebAPI.Controllers
         // GET api/<SectionController>/a-scandal-in-bohemia
         [HttpGet]
         [Route("api/[controller]/a-scandal-in-bohemia")]
-        public IActionResult Book()
+        public IActionResult GetBookContent()
         {
-            //IJSONParser parser = new JSONParser();
             IDictionary<string, Section> dict = parser.LoadJSON();
-            var section = new BookInformationLoader(parser);
+			Section bookContent = dict["a-scandal-in-bohemia"];
 
-            var newSection = dict["a-scandal-in-bohemia"];
-
-            return View("BookContent", newSection);
+			return View("BookContent", bookContent);
         }
 
         // GET api/<SectionController>/bohemia-chapter-1
         [HttpGet]
         [Route("api/[controller]/bohemia-chapter-1")]
-        public string GetBohemiaChapter1()
+        public IActionResult GetBohemiaChapter1()
         {
-            return "bohemia-chapter-1";
-        }
+			IDictionary<string, Section> dict = parser.LoadJSON();
+			Section chapter = dict["bohemia-chapter-1"];
+
+			return View("ChapterContent", chapter);
+		}
 
         // GET api/<SectionController>/bohemia-chapter-2
         [HttpGet]
         [Route("api/[controller]/bohemia-chapter-2")]
-        public string GetBohemiaChapter2()
+        public IActionResult GetBohemiaChapter2()
         {
-            return "bohemia-chapter-2";
-        }
+			IDictionary<string, Section> dict = parser.LoadJSON();
+			Section chapter = dict["bohemia-chapter-2"];
+
+			return View("ChapterContent", chapter);
+		}
 
         // GET api/<SectionController>/bohemia-chapter-3
         [HttpGet]
         [Route("api/[controller]/bohemia-chapter-3")]
-        public string GetBohemiaChapter3()
+        public IActionResult GetBohemiaChapter3()
         {
-            return "bohemia-chapter-3";
-        }
+			IDictionary<string, Section> dict = parser.LoadJSON();
+			Section chapter = dict["bohemia-chapter-3"];
+
+			return View("ChapterContent", chapter);
+		}
     }
 }

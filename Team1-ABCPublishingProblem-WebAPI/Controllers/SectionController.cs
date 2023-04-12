@@ -7,69 +7,77 @@ using Team1_ABCPublishingProblem_WebApp.Models.Objects;
 
 namespace Team1_ABCPublishingProblem_WebAPI.Controllers
 {
-    //[Route("api/[controller]")]
-    [ApiController]
-    public class SectionController : Controller
-    {
-        // GET: api/<SectionController>/preface
-        [HttpGet]
-        [Route("api/[controller]/Preface")]
-        public IDictionary<string, Section> GetBookPreface()
-        {
-            var parser = new JSONParser();
+	//[Route("api/[controller]")]
+	[ApiController]
+	public class SectionController : Controller
+	{
+		private IJSONParser parser = new JSONParser();
+		private IDictionary<string, Section> dict;
 
-            return parser.LoadJSON();
-        }
+		// GET: api/<SectionController>/preface
+		[HttpGet]
+		[Route("api/[controller]/Preface")]
+		public IActionResult GetBookPreface()
+		{
+			IDictionary<string, Section> dict = parser.LoadJSON();
+			Section tableOfContents = dict["table-of-contents"];
 
-        // GET api/<SectionController>/TableOfContents
-        [HttpGet]
-        [Route("api/[controller]/TableOfContents")]
-        public ViewResult GetTableOfContents()
-        {
-            IJSONParser parser = new JSONParser();
-            var section = new BookInformationLoader(parser);
+			return View("Book", tableOfContents);
+		}
 
-            //string[] content = section.GetContentByTitle("table-of-contents");
+		// GET api/<SectionController>/TableOfContents
+		[HttpGet]
+		[Route("api/[controller]/TableOfContents")]
+		public IActionResult GetTableOfContents()
+		{
+			IDictionary<string, Section> dict = parser.LoadJSON();
+			Section tableOfContents = dict["table-of-contents"];
 
-            return View("TableOfContents", section);
-        }
+			return View("TableOfContents", tableOfContents);
+		}
 
-        // GET api/<SectionController>/a-scandal-in-bohemia
-        [HttpGet]
-        [Route("api/[controller]/a-scandal-in-bohemia")]
-        public ViewResult GetBook()
-        {
-            IJSONParser parser = new JSONParser();
-            IDictionary<string, Section> dict = parser.LoadJSON();
-            var section = new BookInformationLoader(parser);
+		// GET api/<SectionController>/a-scandal-in-bohemia
+		[HttpGet]
+		[Route("api/[controller]/a-scandal-in-bohemia")]
+		public IActionResult Book()
+		{
+			IDictionary<string, Section> dict = parser.LoadJSON();
+			Section bookContent = dict["a-scandal-in-bohemia"];
 
-            var newSection = dict["a-scandal-in-bohemia"];
+			return View("BookContent", bookContent);
+		}
 
-            return View("BookContent", newSection);
-        }
+		// GET api/<SectionController>/bohemia-chapter-1
+		[HttpGet]
+		[Route("api/[controller]/bohemia-chapter-1")]
+		public IActionResult GetBohemiaChapter1()
+		{
+			IDictionary<string, Section> dict = parser.LoadJSON();
+			Section chapter = dict["bohemia-chapter-1"];
 
-        // GET api/<SectionController>/bohemia-chapter-1
-        [HttpGet]
-        [Route("api/[controller]/bohemia-chapter-1")]
-        public string GetBohemiaChapter1()
-        {
-            return "bohemia-chapter-1";
-        }
+			return View("ChapterContent", chapter);
+		}
 
-        // GET api/<SectionController>/bohemia-chapter-2
-        [HttpGet]
-        [Route("api/[controller]/bohemia-chapter-2")]
-        public string GetBohemiaChapter2()
-        {
-            return "bohemia-chapter-2";
-        }
+		// GET api/<SectionController>/bohemia-chapter-2
+		[HttpGet]
+		[Route("api/[controller]/bohemia-chapter-2")]
+		public IActionResult GetBohemiaChapter2()
+		{
+			IDictionary<string, Section> dict = parser.LoadJSON();
+			Section chapter = dict["bohemia-chapter-2"];
 
-        // GET api/<SectionController>/bohemia-chapter-3
-        [HttpGet]
-        [Route("api/[controller]/bohemia-chapter-3")]
-        public string GetBohemiaChapter3()
-        {
-            return "bohemia-chapter-3";
-        }
-    }
+			return View("ChapterContent", chapter);
+		}
+
+		// GET api/<SectionController>/bohemia-chapter-3
+		[HttpGet]
+		[Route("api/[controller]/bohemia-chapter-3")]
+		public IActionResult GetBohemiaChapter3()
+		{
+			IDictionary<string, Section> dict = parser.LoadJSON();
+			Section chapter = dict["bohemia-chapter-3"];
+
+			return View("ChapterContent", chapter);
+		}
+	}
 }
