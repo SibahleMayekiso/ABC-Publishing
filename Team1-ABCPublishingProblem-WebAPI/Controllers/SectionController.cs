@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Team1_ABCPublishingProblem;
+using Team1_ABCPublishingProblem_WebApp.Models.Objects;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -11,9 +13,11 @@ namespace Team1_ABCPublishingProblem_WebAPI.Controllers
         // GET: api/<SectionController>/preface
         [HttpGet]
         [Route("api/[controller]/Preface")]
-        public string GetBookPreface()
+        public IDictionary<string, Section> GetBookPreface()
         {
-            return "Book Preface Page";
+            var parser = new JSONParser();
+
+            return parser.LoadJSON();
         }
 
         // GET api/<SectionController>/TableOfContents
