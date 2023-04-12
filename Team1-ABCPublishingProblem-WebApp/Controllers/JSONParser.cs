@@ -12,7 +12,8 @@ namespace Team1_ABCPublishingProblem
         {
             IDictionary<string, Section> sectionDictionary = new Dictionary<string, Section>();
 
-            using (StreamReader reader = new StreamReader("D:\\TeamProject\\Team1-ABCPublishingProblem-WebApp\\Team1-ABCPublishingProblem-WebApp\\the-adventures-of-sherlock-holmes-sample.json"))
+            string fullFilePath = Path.GetFullPath("the-adventures-of-sherlock-holmes-sample.json");
+            using (StreamReader reader = new StreamReader(fullFilePath))
             { 
                 string json = reader.ReadToEnd();
                 JObject section = JObject.Parse(json);
