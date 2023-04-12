@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Team1_ABCPublishingProblem_WebApp.Models.Interfaces;
 using Team1_ABCPublishingProblem_WebApp.Models.Objects;
 
-namespace Team1_ABCPublishingProblem
+namespace Team1_ABCPublishingProblem_WebApp.BusinessLogic
 {
     public class BookInformationLoader
     {
@@ -19,6 +19,16 @@ namespace Team1_ABCPublishingProblem
             _sections = _parser.LoadJSON();
         }
 
+        public bool CheckIfBookTitleExists(string title)
+        {
+            if(!_sections.ContainsKey(title))
+            {
+                return false;
+            }
+
+            return true;
+        }
+
         public string[] GetBookContentFromName(string title)
         {
             return _sections[title].Content;
@@ -29,7 +39,7 @@ namespace Team1_ABCPublishingProblem
             Navigation[] navigationItems = _sections[title].Navigation;
 
             List<string> buttonNames = new List<string>();
-            foreach(Navigation navItem in navigationItems)
+            foreach (Navigation navItem in navigationItems)
             {
                 buttonNames.Add(navItem.Text);
             }

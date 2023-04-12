@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using NUnit.Framework;
+using Team1_ABCPublishingProblem_WebApp.BusinessLogic;
 using Team1_ABCPublishingProblem_WebApp.Controllers;
 
 namespace Team1_ABCPublishingProblem.Tests
@@ -16,6 +17,34 @@ namespace Team1_ABCPublishingProblem.Tests
         public void SetUp()
         {
             bookInformationLoader = new BookInformationLoader(new JSONParser());
+        }
+
+        [Test]
+        public void GIVEN_ValidTitle_WHEN_DeterminingIfTitleExists_THEN_ReturnTrue()
+        {
+            //Arrange
+            string title = "table-of-contents";
+            bool expectedResult = true;
+
+            //Action
+            bool actualResult = bookInformationLoader.CheckIfBookTitleExists(title);
+
+            //Assert
+            Assert.AreEqual(expectedResult, actualResult);
+        }
+
+        [Test]
+        public void GIVEN_InvalidTitle_WHEN_DeterminingIfTitleExists_THEN_ReturnFalse()
+        {
+            //Arrange
+            string title = "the-red-headed-league";
+            bool expectedResult = false;
+
+            //Action
+            bool actualResult = bookInformationLoader.CheckIfBookTitleExists(title);
+
+            //Assert
+            Assert.AreEqual(expectedResult, actualResult);
         }
 
         [Test]
