@@ -12,7 +12,7 @@ namespace Team1_ABCPublishingProblem_WebAPI.Controllers
 	{
 		private IJSONParser parser = new JSONParser();
 		private IDictionary<string, Section> dict;
-		private string Baseurl = "https://localhost:7033/";
+		private string Baseurl = "https://localhost:44329/";
 
 		// GET: api/<SectionController>/preface
 		public async Task<IActionResult> GetPreface()
@@ -34,8 +34,11 @@ namespace Team1_ABCPublishingProblem_WebAPI.Controllers
 					var EmpResponse = Res.Content.ReadAsStringAsync().Result;
 					preface = JsonConvert.DeserializeObject<Section>(EmpResponse);
 				}
-
-				return View("Preface", preface);
+                else
+                {
+                    return RedirectToAction("NotFound");
+                }
+                return View("Preface", preface);
 			}
 		}
 
@@ -57,8 +60,11 @@ namespace Team1_ABCPublishingProblem_WebAPI.Controllers
 					var EmpResponse = Res.Content.ReadAsStringAsync().Result;
 					tableOfContents = JsonConvert.DeserializeObject<Section>(EmpResponse);
 				}
-
-				return View("TableOfContents", tableOfContents);
+                else
+                {
+                    return RedirectToAction("NotFound");
+                }
+                return View("TableOfContents", tableOfContents);
 			}
 		}
 
@@ -79,6 +85,11 @@ namespace Team1_ABCPublishingProblem_WebAPI.Controllers
 
 					var EmpResponse = Res.Content.ReadAsStringAsync().Result;
 					bookContent = JsonConvert.DeserializeObject<Section>(EmpResponse);
+				}
+
+				else
+				{
+					return RedirectToAction("NotFound");
 				}
 
 				return View("BookContent", bookContent);
@@ -103,9 +114,18 @@ namespace Team1_ABCPublishingProblem_WebAPI.Controllers
 					var EmpResponse = Res.Content.ReadAsStringAsync().Result;
 					chapterContent = JsonConvert.DeserializeObject<Section>(EmpResponse);
 				}
+                else
+                {
+                    return RedirectToAction("NotFound");
+                }
 
-				return View("ChapterContent", chapterContent);
+                return View("ChapterContent", chapterContent);
 			}
+		}
+
+		public IActionResult NotFOund()
+		{
+			return View();
 		}
 	}
 }
