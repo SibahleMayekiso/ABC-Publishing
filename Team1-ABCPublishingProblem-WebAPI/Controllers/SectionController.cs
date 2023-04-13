@@ -56,37 +56,15 @@ namespace Team1_ABCPublishingProblem_WebAPI.Controllers
             }
         }
 
-		// GET api/<SectionController>/bohemia-chapter-1
-		[HttpGet]
-		[Route("api/[controller]/bohemia-chapter-1")]
-		public Section GetBohemiaChapter1()
-		{
-			IDictionary<string, Section> dict = parser.LoadJSON();
-			Section chapter = dict["bohemia-chapter-1"];
+        // GET api/<SectionController>/bohemia-chapter-1
+        [HttpGet]
+        [Route("api/[controller]/chapter/{id}")]
+        public Section GetBookChapter(string id)
+        {
+            IDictionary<string, Section> dict = parser.LoadJSON();
+            Section chapter = dict[id];
 
-			return chapter;
-		}
-
-		// GET api/<SectionController>/bohemia-chapter-2
-		[HttpGet]
-		[Route("api/[controller]/bohemia-chapter-2")]
-		public Section GetBohemiaChapter2()
-		{
-			IDictionary<string, Section> dict = parser.LoadJSON();
-			Section chapter = dict["bohemia-chapter-2"];
-
-			return chapter;
-		}
-
-		// GET api/<SectionController>/bohemia-chapter-3
-		[HttpGet]
-		[Route("api/[controller]/bohemia-chapter-3")]
-		public Section GetBohemiaChapter3()
-		{
-			IDictionary<string, Section> dict = parser.LoadJSON();
-			Section chapter = dict["bohemia-chapter-3"];
-
-			return chapter;
-		}
+            return chapter;
+        }
 	}
 }
