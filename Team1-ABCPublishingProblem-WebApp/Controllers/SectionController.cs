@@ -51,7 +51,7 @@ namespace Team1_ABCPublishingProblem_WebAPI.Controllers
 
 				client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-				HttpResponseMessage Res = await client.GetAsync("api/Section/Section/" + id);
+				HttpResponseMessage Res = await client.GetAsync("api/Section/" + id);
 
 				if (Res.IsSuccessStatusCode)
 				{
@@ -77,7 +77,7 @@ namespace Team1_ABCPublishingProblem_WebAPI.Controllers
 
 				client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-				HttpResponseMessage Res = await client.GetAsync("api/Section/Section/" + id);
+				HttpResponseMessage Res = await client.GetAsync("api/Section/" + id);
 
 				if (Res.IsSuccessStatusCode)
 				{
@@ -105,7 +105,7 @@ namespace Team1_ABCPublishingProblem_WebAPI.Controllers
 
 				client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-				HttpResponseMessage Res = await client.GetAsync("api/Section/Section/" + id);
+				HttpResponseMessage Res = await client.GetAsync("api/Section/" + id);
 
 				if (Res.IsSuccessStatusCode)
 				{

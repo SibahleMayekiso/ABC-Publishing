@@ -26,7 +26,7 @@ namespace Team1_ABCPublishingProblem_WebAPI.Controllers
         }
 
         [HttpGet]
-        [Route("api/[controller]/Section/{id}")]
+        [Route("api/[controller]/{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public IActionResult GetSection(string id)
