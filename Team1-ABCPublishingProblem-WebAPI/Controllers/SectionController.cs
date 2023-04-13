@@ -17,12 +17,12 @@ namespace Team1_ABCPublishingProblem_WebAPI.Controllers
 		// GET: api/<SectionController>/preface
 		[HttpGet]
 		[Route("api/[controller]/Preface")]
-		public IActionResult GetPreface()
+		public Section GetPreface()
 		{
 			IDictionary<string, Section> dict = parser.LoadJSON();
-			Section tableOfContents = dict["table-of-contents"];
+			Section preface = dict["preface"];
 
-			return View("Book", tableOfContents);
+			return preface;
 		}
 
 		// GET api/<SectionController>/TableOfContents
