@@ -14,7 +14,7 @@
 	@foreach (var book in Model.Navigation)
 	{
 		<li class="list-group-item">
-			<a href="@Url.Action(action: "Book", controller: "Section", values: new {id = book.Section})">@Html.DisplayFor(m => book.Text)</a>
+			<a href="@Url.Action(action: "GetBookContent", controller: "Section", values: new {id = book.Section})">@Html.DisplayFor(m => book.Text)</a>
 		</li>
 	}
 </ul>

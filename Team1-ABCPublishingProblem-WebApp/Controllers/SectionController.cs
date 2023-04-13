@@ -5,13 +5,13 @@ using Team1_ABCPublishingProblem_WebApp.Models.Objects;
 
 namespace Team1_ABCPublishingProblem_WebAPI.Controllers
 {
-    //[Route("api/[controller]")]
-    //[ApiController]
     public class SectionController : Controller
     {
         private IJSONParser parser = new JSONParser();
         private IDictionary<string, Section> dict;
 
+
+        // GET: api/<SectionController>/preface
         public IActionResult GetPreface()
         {
             IDictionary<string, Section> dict = parser.LoadJSON();
@@ -21,8 +21,6 @@ namespace Team1_ABCPublishingProblem_WebAPI.Controllers
         }
 
         // GET api/<SectionController>/TableOfContents
-        [HttpGet]
-        [Route("api/[controller]/TableOfContents")]
         public IActionResult GetTableOfContents()
         {
             IDictionary<string, Section> dict = parser.LoadJSON();
@@ -32,9 +30,7 @@ namespace Team1_ABCPublishingProblem_WebAPI.Controllers
         }
 
         // GET api/<SectionController>/a-scandal-in-bohemia
-        [HttpGet]
-        [Route("api/[controller]/a-scandal-in-bohemia")]
-        public IActionResult GetBookContent(string id)
+        public IActionResult GetBookContent()
         {
             IDictionary<string, Section> dict = parser.LoadJSON();
             Section bookContent = dict["a-scandal-in-bohemia"];
@@ -43,8 +39,6 @@ namespace Team1_ABCPublishingProblem_WebAPI.Controllers
         }
 
         // GET api/<SectionController>/bohemia-chapter-1
-        [HttpGet]
-        [Route("api/[controller]/bohemia-chapter-1")]
         public IActionResult GetBohemiaChapter1()
         {
             IDictionary<string, Section> dict = parser.LoadJSON();
@@ -54,8 +48,6 @@ namespace Team1_ABCPublishingProblem_WebAPI.Controllers
         }
 
         // GET api/<SectionController>/bohemia-chapter-2
-        [HttpGet]
-        [Route("api/[controller]/bohemia-chapter-2")]
         public IActionResult GetBohemiaChapter2()
         {
             IDictionary<string, Section> dict = parser.LoadJSON();
@@ -65,8 +57,6 @@ namespace Team1_ABCPublishingProblem_WebAPI.Controllers
         }
 
         // GET api/<SectionController>/bohemia-chapter-3
-        [HttpGet]
-        [Route("api/[controller]/bohemia-chapter-3")]
         public IActionResult GetBohemiaChapter3()
         {
             IDictionary<string, Section> dict = parser.LoadJSON();

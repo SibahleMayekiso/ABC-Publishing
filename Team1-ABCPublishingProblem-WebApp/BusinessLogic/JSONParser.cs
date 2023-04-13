@@ -3,6 +3,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Team1_ABCPublishingProblem_WebApp.Models.Interfaces;
 using Team1_ABCPublishingProblem_WebApp.Models.Objects;
+using Team1_ABCPublishingProblem_WebApp.Constants;
 
 namespace Team1_ABCPublishingProblem_WebApp.BusinessLogic
 {
@@ -12,7 +13,7 @@ namespace Team1_ABCPublishingProblem_WebApp.BusinessLogic
         {
             IDictionary<string, Section> sectionDictionary = new Dictionary<string, Section>();
 
-            string fullFilePath = Path.GetFullPath("the-adventures-of-sherlock-holmes-sample.json");
+            string fullFilePath = Path.GetFullPath(JSONContstants.JSONFilePath);
             using (StreamReader reader = new StreamReader(fullFilePath))
             {
                 string json = reader.ReadToEnd();
@@ -26,16 +27,6 @@ namespace Team1_ABCPublishingProblem_WebApp.BusinessLogic
                 }
             }
 
-            foreach (var section in sectionDictionary)
-            {
-                string content = "";
-                if (section.Value.Content.Length > 0)
-                {
-                    content = section.Value.Content[0];
-                }
-                Console.WriteLine("Section Name: " + section.Value.Name + ", Section Content:" + content + ", First Navigation: " + section.Value.Navigation[0].Text);
-            }
-
             return sectionDictionary;
         }
 
@@ -46,9 +37,9 @@ namespace Team1_ABCPublishingProblem_WebApp.BusinessLogic
             Section newSection = new Section();
 
             newSection.Name = property.Name;
-            newSection.Title = (string)sectionObj["title"];
+            newSection.Title = (string)sectionObj[JSONContstants.TitleKey];
 
-            JArray sectionContent = (JArray)sectionObj["content"];
+            JArray sectionContent = (JArray)sectionObj[JSONContstants.Contentkey];
             newSection.Content = sectionContent.ToObject<string[]>();
 
             List<Navigation> navigationList = ParseNavigationObject(sectionObj);
@@ -59,13 +50,13 @@ namespace Team1_ABCPublishingProblem_WebApp.BusinessLogic
 
         private List<Navigation> ParseNavigationObject(JObject sectionObj)
         {
-            JArray sectionNavigation = (JArray)sectionObj["navigation"];
+            JArray sectionNavigation = (JArray)sectionObj[JSONContstants.NavigationKey];
             List<Navigation> navigationList = new List<Navigation>();
             foreach (JObject navItem in sectionNavigation)
             {
                 Navigation navigation = new Navigation();
-                navigation.Text = (string)navItem["text"];
-                navigation.Section = (string)navItem["section"];
+                navigation.Text = (string)navItem[JSONContstants.TextKey];
+                navigation.Section = (string)navItem[JSONContstants.SectionKey];
                 navigationList.Add(navigation);
             }
 

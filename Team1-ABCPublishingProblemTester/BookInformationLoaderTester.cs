@@ -185,5 +185,42 @@ namespace Team1_ABCPublishingProblem.Tests
             //Assert
             Assert.AreEqual(expectedResult, actualResult);
         }
+
+        [Test]
+        public void GIVEN_SectionTitle_WHEN_GettingButtonText_THEN_ReturnButtonText()
+        {
+            //Arrange
+            const string title = "The Adventures of Sherlock Holmes";
+            string[] expectedResult = {
+                "A Scandal in Bohemia",
+                "The Red-Headed League",
+                "Return to Preface"
+            };
+
+            //Action
+            string[] actualResult = bookInformationLoader.GetButtonTextByTitle(title);
+
+            //Assert
+            Assert.AreEqual(expectedResult, actualResult);
+        }
+
+        [Test]
+        public void GIVEN_SectionTitle_WHEN_GettingButtonSections_THEN_ReturnButtonSections()
+        {
+            //Arrange
+            const string title = "A Scandal in Bohemia";
+            string[] expectedResult = {
+                "bohemia-chapter-1",
+                "bohemia-chapter-2",
+                "bohemia-chapter-3",
+                "table-of-contents"
+            };
+
+            //Action
+            string[] actualResult = bookInformationLoader.GetButtonSectionsByTitle(title);
+
+            //Assert
+            Assert.AreEqual(expectedResult, actualResult);
+        }
     }
 }
