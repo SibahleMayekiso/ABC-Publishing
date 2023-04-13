@@ -1,20 +1,15 @@
 ﻿@model Team1_ABCPublishingProblem_WebApp.Models.Objects.Section
 @{
-<<<<<<< HEAD
 	ViewData["Title"] = Html.DisplayFor(m => m.Title);
-=======
-	ViewData["Title"] = "Table of Contents";
->>>>>>> 95ee584cce7218059b6b6ca881813ca5d4e7d3f7
 }
+
 
 <h4 class="display-4">@Html.DisplayFor(m => m.Title)</h4>
 <hr />
 <h2>List of Books</h2>
-<<<<<<< HEAD
 
-=======
 <h1>@Html.DisplayFor( m => m.Title)</h1>
->>>>>>> 95ee584cce7218059b6b6ca881813ca5d4e7d3f7
+
 <ul class="list-group">
 	@foreach (var book in Model.Navigation)
 	{
