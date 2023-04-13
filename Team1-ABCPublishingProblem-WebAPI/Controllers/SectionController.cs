@@ -37,14 +37,24 @@ namespace Team1_ABCPublishingProblem_WebAPI.Controllers
 
 		// GET api/<SectionController>/a-scandal-in-bohemia
 		[HttpGet]
-		[Route("api/[controller]/a-scandal-in-bohemia")]
-		public Section GetBook()
+		[Route("api/[controller]/book/{id}")]
+		public Section GetBook(string id)
 		{
 			IDictionary<string, Section> dict = parser.LoadJSON();
-			Section bookContent = dict["a-scandal-in-bohemia"];
+			Section bookContent = new Section();
 
-			return bookContent;
-		}
+			if (dict.ContainsKey(id))
+			{
+				bookContent = dict[id];
+
+				return bookContent;
+			}
+            else
+            {
+				//return NotFound();
+				return bookContent;
+            }
+        }
 
 		// GET api/<SectionController>/bohemia-chapter-1
 		[HttpGet]
