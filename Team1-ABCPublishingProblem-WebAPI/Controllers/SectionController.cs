@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Team1_ABCPublishingProblem;
+using Team1_ABCPublishingProblem_WebApp.BusinessLogic;
 using Team1_ABCPublishingProblem_WebApp.Models.Objects;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
