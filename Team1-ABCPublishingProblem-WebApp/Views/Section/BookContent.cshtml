@@ -7,16 +7,18 @@
 
 <hr />
 
-<div>
-	@Html.DisplayFor(m => m.Content)
+<div class="card">
+	<div class="card-body">
+		@Html.DisplayFor(m => m.Content)
+	</div>
+	<ul class="list-group-flush">
+		@foreach (var chapter in Model.Navigation)
+		{
+			<li class="nav-link list-group-item">
+				<a href="@Url.Action(action:"GetBookContent", controller: "Section", values: new {id = chapter.Section})" class="text-reset text-decoration-none">@Html.DisplayFor(m => chapter.Text)</a>
+			</li>
+		}
+	</ul>
 </div>
-<ul class="list-group">
-	@foreach (var chapter in Model.Navigation)
-	{
-		<li class="list-group-item">
-			<a href="@Url.Action(action:"GetBookContent", controller: "Section", values: new {id = chapter.Section})">@Html.DisplayFor(m => chapter.Text)</a>
-		</li>
-	}
-</ul>
 
-<a href="@Url.Action(action:"GetPreface", controller: "Section")">Return to Preface</a>
+<a href="@Url.Action(action:"GetPreface", controller: "Section")" class=" text-reset text-decoration-none">Return to Preface</a>

@@ -3,15 +3,15 @@
 	ViewData["Title"] = Html.DisplayFor(m => m.Title);
 }
 
-
-
-<h1>@Html.DisplayFor( m => m.Title)</h1>
+<div class="text-center">
+	<h1 class ="display-4">@Html.DisplayFor( m => m.Title)</h1>
+</div>
 
 <ul class="list-group">
 	@foreach (var book in Model.Navigation)
 	{
-		<li class="list-group-item">
-			<a href="@Url.Action(action: "GetBookContent", controller: "Section", values: new {id = book.Section})">@Html.DisplayFor(m => book.Text)</a>
+		<li class="list-unstyled list-group-item">
+			<a href="@Url.Action(action: "GetBookContent", controller: "Section", values: new {id = book.Section})" class="text-reset text-decoration-none">@Html.DisplayFor(m => book.Text)</a>
 		</li>
 	}
 </ul>
