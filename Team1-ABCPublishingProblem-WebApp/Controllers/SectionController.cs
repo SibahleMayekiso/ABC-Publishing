@@ -1,68 +1,112 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Net.Http.Headers;
+using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using Team1_ABCPublishingProblem_WebApp.BusinessLogic;
 using Team1_ABCPublishingProblem_WebApp.Models.Interfaces;
 using Team1_ABCPublishingProblem_WebApp.Models.Objects;
 
 namespace Team1_ABCPublishingProblem_WebAPI.Controllers
 {
-    public class SectionController : Controller
-    {
-        private IJSONParser parser = new JSONParser();
-        private IDictionary<string, Section> dict;
+	public class SectionController : Controller
+	{
+		private IJSONParser parser = new JSONParser();
+		private IDictionary<string, Section> dict;
+		private string Baseurl = "https://localhost:7033/";
 
 
-        // GET: api/<SectionController>/preface
-        public IActionResult GetPreface()
-        {
-            IDictionary<string, Section> dict = parser.LoadJSON();
-            Section preface = dict["preface"];
+		// GET: api/<SectionController>/preface
+		public async Task<IActionResult> GetPreface()
+		{
+			Section preface = new Section();
 
-            return View("Preface", preface);
-        }
+			using (var client = new HttpClient())
+			{
+				client.BaseAddress = new Uri(Baseurl);
+				client.DefaultRequestHeaders.Clear();
 
-        // GET api/<SectionController>/TableOfContents
-        public IActionResult GetTableOfContents()
-        {
-            IDictionary<string, Section> dict = parser.LoadJSON();
-            Section tableOfContents = dict["table-of-contents"];
+				client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-            return View("TableOfContents", tableOfContents);
-        }
+				HttpResponseMessage Res = await client.GetAsync("api/Section/Preface");
 
-        // GET api/<SectionController>/a-scandal-in-bohemia
-        public IActionResult GetBookContent()
-        {
-            IDictionary<string, Section> dict = parser.LoadJSON();
-            Section bookContent = dict["a-scandal-in-bohemia"];
+				if (Res.IsSuccessStatusCode)
+				{
 
-            return View("BookContent", bookContent);
-        }
+					var EmpResponse = Res.Content.ReadAsStringAsync().Result;
+					preface = JsonConvert.DeserializeObject<Section>(EmpResponse);
+				}
 
-        // GET api/<SectionController>/bohemia-chapter-1
-        public IActionResult GetBohemiaChapter1()
-        {
-            IDictionary<string, Section> dict = parser.LoadJSON();
-            Section chapter = dict["bohemia-chapter-1"];
+				return View("Preface", preface);
+			}
+		}
 
-            return View("ChapterContent", chapter);
-        }
+		public async Task<IActionResult> GetTableOfContents(string id)
+		{
+			Section tableOfContents = new Section();
+			using (var client = new HttpClient())
+			{
+				client.BaseAddress = new Uri(Baseurl);
+				client.DefaultRequestHeaders.Clear();
 
-        // GET api/<SectionController>/bohemia-chapter-2
-        public IActionResult GetBohemiaChapter2()
-        {
-            IDictionary<string, Section> dict = parser.LoadJSON();
-            Section chapter = dict["bohemia-chapter-2"];
+				client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-            return View("ChapterContent", chapter);
-        }
+				HttpResponseMessage Res = await client.GetAsync("api/Section/Section/" + id);
 
-        // GET api/<SectionController>/bohemia-chapter-3
-        public IActionResult GetBohemiaChapter3()
-        {
-            IDictionary<string, Section> dict = parser.LoadJSON();
-            Section chapter = dict["bohemia-chapter-3"];
+				if (Res.IsSuccessStatusCode)
+				{
 
-            return View("ChapterContent", chapter);
-        }
-    }
+					var EmpResponse = Res.Content.ReadAsStringAsync().Result;
+					tableOfContents = JsonConvert.DeserializeObject<Section>(EmpResponse);
+				}
+
+				return View("TableOfContents", tableOfContents);
+			}
+		}
+
+		public async Task<IActionResult> GetBookContent(string id)
+		{
+			Section bookContent = new Section();
+			using (var client = new HttpClient())
+			{
+				client.BaseAddress = new Uri(Baseurl);
+				client.DefaultRequestHeaders.Clear();
+
+				client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+				HttpResponseMessage Res = await client.GetAsync("api/Section/Section/" + id);
+
+				if (Res.IsSuccessStatusCode)
+				{
+
+					var EmpResponse = Res.Content.ReadAsStringAsync().Result;
+					bookContent = JsonConvert.DeserializeObject<Section>(EmpResponse);
+				}
+
+				return View("BookContent", bookContent);
+			}
+		}
+
+		public async Task<IActionResult> GetChapterContent(string id)
+		{
+			Section chapterContent = new Section();
+			using (var client = new HttpClient())
+			{
+				client.BaseAddress = new Uri(Baseurl);
+				client.DefaultRequestHeaders.Clear();
+
+				client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+				HttpResponseMessage Res = await client.GetAsync("api/Section/Section/" + id);
+
+				if (Res.IsSuccessStatusCode)
+				{
+
+					var EmpResponse = Res.Content.ReadAsStringAsync().Result;
+					chapterContent = JsonConvert.DeserializeObject<Section>(EmpResponse);
+				}
+
+				return View("ChapterContent", chapterContent);
+			}
+		}
+	}
 }
+
