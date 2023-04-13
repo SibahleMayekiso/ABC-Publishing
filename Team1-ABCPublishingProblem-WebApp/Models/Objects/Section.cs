@@ -8,9 +8,9 @@ namespace Team1_ABCPublishingProblem_WebApp.Models.Objects
 {
     public class Section
     {
-        public string Name;
-        public string Title;
-        public string[] Content;
-        public Navigation[] Navigation;
+        public string Name { get; set; }
+        public string Title { get; set; }
+        public string[] Content { get; set; }
+        public Navigation[] Navigation { get; set; }
     }
 }
