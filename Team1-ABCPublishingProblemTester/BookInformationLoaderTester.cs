@@ -163,7 +163,7 @@ namespace Team1_ABCPublishingProblem.Tests
             };
 
             //Action
-            string[] actualResult = bookInformationLoader.GetButtonNamesByKey(key);
+            string[] actualResult = bookInformationLoader.GetButtonTextByKey(key);
 
             //Assert
             Assert.AreEqual(expectedResult, actualResult);
