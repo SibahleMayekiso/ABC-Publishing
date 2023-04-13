@@ -12,9 +12,8 @@ namespace Team1_ABCPublishingProblem_WebAPI.Controllers
 	{
 		private IJSONParser parser = new JSONParser();
 		private IDictionary<string, Section> dict;
-		private string Baseurl = "https://localhost:44329/";
+		private string Baseurl = "https://localhost:7033/";
 
-		// GET: api/<SectionController>/preface
 		public async Task<IActionResult> GetPreface()
 		{
 			Section preface = new Section();
@@ -123,7 +122,7 @@ namespace Team1_ABCPublishingProblem_WebAPI.Controllers
 			}
 		}
 
-		public IActionResult NotFOund()
+		public IActionResult NotFound()
 		{
 			return View();
 		}

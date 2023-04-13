@@ -17,22 +17,30 @@ namespace Team1_ABCPublishingProblem_WebAPI.Controllers
         // GET: api/<SectionController>/preface
         [HttpGet]
         [Route("api/[controller]/Preface")]
-        public Section GetBookPreface()
+        public IActionResult GetBookPreface()
         {
             IDictionary<string, Section> dict = parser.LoadJSON();
-            Section preface = dict["preface"];
+            //Section preface = dict["preface"];
 
-            return preface;
+            return Ok(dict["preface"]);
         }
 
         [HttpGet]
         [Route("api/[controller]/Section/{id}")]
-        public Section GetSection(string id)
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public IActionResult GetSection(string id)
         {
             IDictionary<string, Section> dict = parser.LoadJSON();
-            Section tableOfContents = dict[id];
 
-            return tableOfContents;
+            Section tableOfContents = new Section();
+
+            if (!dict.ContainsKey(id))
+            {
+                return BadRequest();
+            }
+
+            return Ok(dict[id]);
         }
     }
 }
