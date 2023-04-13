@@ -1,19 +1,18 @@
 ﻿@model Team1_ABCPublishingProblem_WebApp.Models.Objects.Section
 @{
-    ViewData["Title"] = Html.DisplayFor(m => m.Title);
+	ViewData["Title"] = Html.DisplayFor(m => m.Title);
 }
 
 <h2>Book Chapters</h2>
 
-<hr/>
-
+<hr />
 <ul class="list-group">
-    @foreach (var chapter in Model.Navigation)
-    {
-            <li class="list-group-item">
-                <a href="@Url.Action(action:"GetChapterContent", controller: "Section", values: new {id = chapter.Section})">@Html.DisplayFor(m => chapter.Text)</a>
-            </li>
-    }
+	@foreach (var chapter in Model.Navigation)
+	{
+		<li class="list-group-item">
+			<a href="@Url.Action(action:"GetChapterContent", controller: "Section", values: new {id = chapter.Section})">@Html.DisplayFor(m => chapter.Text)</a>
+		</li>
+	}
 </ul>
 
 <a href="#">Return to Preface</a>
