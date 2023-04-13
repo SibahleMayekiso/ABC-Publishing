@@ -1,12 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Team1_ABCPublishingProblem_WebApp.BusinessLogic;
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-=======
 using Team1_ABCPublishingProblem_WebApp.Models.Interfaces;
->>>>>>> 95ee584cce7218059b6b6ca881813ca5d4e7d3f7
->>>>>>> ef11b0b6eea89d82d6a67d501e4f7fd229d57ba6
 using Team1_ABCPublishingProblem_WebApp.Models.Objects;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
