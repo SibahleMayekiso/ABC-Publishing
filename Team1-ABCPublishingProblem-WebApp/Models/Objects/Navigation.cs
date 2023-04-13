@@ -8,7 +8,7 @@ namespace Team1_ABCPublishingProblem_WebApp.Models.Objects
 {
     public class Navigation
     {
-        public string Text;
-        public string Section;
+        public string Text { get; set; }
+        public string Section { get; set; }
     }
 }

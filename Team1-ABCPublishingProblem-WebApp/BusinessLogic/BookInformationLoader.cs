@@ -18,6 +18,7 @@ namespace Team1_ABCPublishingProblem_WebApp.BusinessLogic
         {
             _parser = parser;
             _sections = _parser.LoadJSON();
+            Section exampleSection = _sections["a-scandal-in-bohemia"];
         }
 
         public bool CheckIfKeyExists(string key)
@@ -84,22 +85,52 @@ namespace Team1_ABCPublishingProblem_WebApp.BusinessLogic
         {
             string key = _sections.FirstOrDefault(x => x.Value.Title == title).Key;
 
+            if (key == null || _sections[key].Content == null)
+            {
+                return new string[0];
+            }
+
             return _sections[key].Content;
         }
 
-        //public string[] GetButtonTextByTitle(string title)
-        //{
-        //    ThrowExceptionIfKeyNotFound(key);
+        public string[] GetButtonTextByTitle(string title)
+        {
+            string key = _sections.FirstOrDefault(x => x.Value.Title == title).Key;
 
-        //    Navigation[] navigationItems = _sections[key].Navigation;
+            if(key == null)
+            {
+                return new string[0];
+            }
 
-        //    List<string> buttonNames = new List<string>();
-        //    foreach (Navigation navItem in navigationItems)
-        //    {
-        //        buttonNames.Add(navItem.Text);
-        //    }
+            Navigation[] navigationItems = _sections[key].Navigation;
 
-        //    return buttonNames.ToArray();
-        //}
+            List<string> buttonNames = new List<string>();
+            foreach (Navigation navItem in navigationItems)
+            {
+                buttonNames.Add(navItem.Text);
+            }
+
+            return buttonNames.ToArray();
+        }
+
+        public string[] GetButtonSectionsByTitle(string title)
+        {
+            string key = _sections.FirstOrDefault(x => x.Value.Title == title).Key;
+
+            if (key == null)
+            {
+                return new string[0];
+            }
+
+            Navigation[] navigationItems = _sections[key].Navigation;
+
+            List<string> buttonSections = new List<string>();
+            foreach (Navigation navItem in navigationItems)
+            {
+                buttonSections.Add(navItem.Section);
+            }
+
+            return buttonSections.ToArray();
+        }
     }
 }
