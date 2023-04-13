@@ -18,7 +18,6 @@ namespace Team1_ABCPublishingProblem_WebApp.BusinessLogic
         {
             _parser = parser;
             _sections = _parser.LoadJSON();
-            Section exampleSection = _sections["a-scandal-in-bohemia"];
         }
 
         public bool CheckIfKeyExists(string key)
