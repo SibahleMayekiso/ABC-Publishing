@@ -1,5 +1,19 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model Team1_ABCPublishingProblem_WebApp.Models.Objects.Section
 @{
+    ViewData["Title"] = Html.DisplayFor(m => m.Title);
 }
+
+<h2>Book Chapters</h2>
+
+<hr/>
+
+<ul class="list-group">
+    @foreach (var chapter in Model.Navigation)
+    {
+            <li class="list-group-item">
+                <a href="@Url.Action(action:"GetChapterContent", controller: "Section", values: new {id = chapter.Section})">@Html.DisplayFor(m => chapter.Text)</a>
+            </li>
+    }
+</ul>
+
+<a href="#">Return to Preface</a>
