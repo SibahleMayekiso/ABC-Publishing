@@ -30,40 +30,14 @@ namespace Team1_ABCPublishingProblem_WebAPI.Controllers
 				if (Res.IsSuccessStatusCode)
 				{
 
-					var EmpResponse = Res.Content.ReadAsStringAsync().Result;
-					preface = JsonConvert.DeserializeObject<Section>(EmpResponse);
+					var prefaceResponse = Res.Content.ReadAsStringAsync().Result;
+					preface = JsonConvert.DeserializeObject<Section>(prefaceResponse);
 				}
                 else
                 {
                     return RedirectToAction("NotFound");
                 }
                 return View("Preface", preface);
-			}
-		}
-
-		public async Task<IActionResult> GetTableOfContents(string id)
-		{
-			Section tableOfContents = new Section();
-			using (var client = new HttpClient())
-			{
-				client.BaseAddress = new Uri(Baseurl);
-				client.DefaultRequestHeaders.Clear();
-
-				client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-
-				HttpResponseMessage Res = await client.GetAsync("api/Section/" + id);
-
-				if (Res.IsSuccessStatusCode)
-				{
-
-					var EmpResponse = Res.Content.ReadAsStringAsync().Result;
-					tableOfContents = JsonConvert.DeserializeObject<Section>(EmpResponse);
-				}
-                else
-                {
-                    return RedirectToAction("NotFound");
-                }
-                return View("TableOfContents", tableOfContents);
 			}
 		}
 
@@ -82,8 +56,8 @@ namespace Team1_ABCPublishingProblem_WebAPI.Controllers
 				if (Res.IsSuccessStatusCode)
 				{
 
-					var EmpResponse = Res.Content.ReadAsStringAsync().Result;
-					bookContent = JsonConvert.DeserializeObject<Section>(EmpResponse);
+					var bookResponse = Res.Content.ReadAsStringAsync().Result;
+					bookContent = JsonConvert.DeserializeObject<Section>(bookResponse);
 				}
 
 				else
@@ -92,33 +66,6 @@ namespace Team1_ABCPublishingProblem_WebAPI.Controllers
 				}
 
 				return View("BookContent", bookContent);
-			}
-		}
-
-		public async Task<IActionResult> GetChapterContent(string id)
-		{
-			Section chapterContent = new Section();
-			using (var client = new HttpClient())
-			{
-				client.BaseAddress = new Uri(Baseurl);
-				client.DefaultRequestHeaders.Clear();
-
-				client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-
-				HttpResponseMessage Res = await client.GetAsync("api/Section/" + id);
-
-				if (Res.IsSuccessStatusCode)
-				{
-
-					var EmpResponse = Res.Content.ReadAsStringAsync().Result;
-					chapterContent = JsonConvert.DeserializeObject<Section>(EmpResponse);
-				}
-                else
-                {
-                    return RedirectToAction("NotFound");
-                }
-
-                return View("ChapterContent", chapterContent);
 			}
 		}
 

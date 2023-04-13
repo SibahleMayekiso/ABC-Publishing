@@ -6,13 +6,17 @@
 <h2>@Html.DisplayFor(m => m.Title)</h2>
 
 <hr />
+
+<div>
+	@Html.DisplayFor(m => m.Content)
+</div>
 <ul class="list-group">
 	@foreach (var chapter in Model.Navigation)
 	{
 		<li class="list-group-item">
-			<a href="@Url.Action(action:"GetChapterContent", controller: "Section", values: new {id = chapter.Section})">@Html.DisplayFor(m => chapter.Text)</a>
+			<a href="@Url.Action(action:"GetBookContent", controller: "Section", values: new {id = chapter.Section})">@Html.DisplayFor(m => chapter.Text)</a>
 		</li>
 	}
 </ul>
 
-<a href="#">Return to Preface</a>
+<a href="@Url.Action(action:"GetPreface", controller: "Section")">Return to Preface</a>

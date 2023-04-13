@@ -7,13 +7,14 @@
     <h1 class="display-4">Welcome</h1>
 </div>
 
+<hr />
 <h2>@Html.DisplayFor(m => m.Title)</h2>
 
 <ul class="list-group">
     @foreach (var item in Model.Navigation)
     {
         <li class="list-group-item">
-            <a href="@Url.Action(action: "GetTableOfContents", controller: "Section", values: new {id = item.Section})">@Html.DisplayFor(m => item.Text)</a>
+            <a href="@Url.Action(action: "GetBookContent", controller: "Section", values: new {id = item.Section})">@Html.DisplayFor(m => item.Text)</a>
         </li>
     }
 </ul>
