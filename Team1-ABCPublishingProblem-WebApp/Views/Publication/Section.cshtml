@@ -1,13 +1,13 @@
 ﻿@model Team1_ABCPublishingProblem_WebApp.Models.Objects.Section
 @{
-    ViewData["Title"] = Html.DisplayFor(m => m.Title);
+	ViewData["Title"] = Html.DisplayFor(m => m.Title);
 }
 
 @if (Model.Title == "Preface")
 {
-    <div class="text-center">
-        <h1 class="display-4">Welcome</h1>
-    </div>
+	<div class="text-center">
+		<h1 class="display-4">Welcome</h1>
+	</div>
 }
 
 
@@ -15,15 +15,19 @@
 
 <hr />
 
-<div>
-    @Html.DisplayFor(m => m.Content)
-</div>
+@foreach (var item in Model.Content)
+{
+	<p>
+		@Html.DisplayFor(m => item)
+	</p>
+}
+
 
 <ul class="list-group">
-    @foreach (var item in Model.Navigation)
-    {
-        <li class="list-group-item">
-            <a href="@Url.Action(action: "Section", values: new {id = item.Section})">@Html.DisplayFor(m => item.Text)</a>
-        </li>
-    }
+	@foreach (var item in Model.Navigation)
+	{
+		<li class="list-group-item">
+			<a href="@Url.Action(action: "Section", values: new {id = item.Section})">@Html.DisplayFor(m => item.Text)</a>
+		</li>
+	}
 </ul>
